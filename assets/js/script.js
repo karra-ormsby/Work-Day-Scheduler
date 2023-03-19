@@ -51,4 +51,14 @@ function setHourBlocks () {
   }
 }
 
+var saveBtn = $(".saveBtn");
 
+saveBtn.on("click", function (event) {
+  console.log("haha");
+  var element = event.target;
+  console.log(element);
+  var textArea = $(element).prev().val();
+  console.log(textArea)
+
+  localStorage.setItem("calendarEvent", textArea);
+});
