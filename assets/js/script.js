@@ -23,9 +23,32 @@
 // });
 
 
-displayTime();
+displayDate();
+setHourBlocks();
 
-function displayTime() {
-  var today = dayjs().format('MM DD, YYYY [at] hh:mm:ss a');
+//displays the current date
+function displayDate() {
+  var today = dayjs().format('dddd DD[th of] MMMM');
   $("#currentDay").text(today);
 }
+
+//changes the olour of each hour bloack depending on whether it is past, present, or future
+function setHourBlocks () {
+  var currentHour = parseInt(dayjs().format('HH'));
+  var hourBlockEl;
+
+  for(i = 0; i <= 8; i++) {
+    hourBlockEl = $('body').children("div").children().eq(i);
+    hourNum = parseInt(hourBlockEl.attr("id").split('-')[1]);
+
+    if (currentHour < hourNum) {
+      hourBlockEl.addClass("future");
+    } else if (currentHour > hourNum) {
+      hourBlockEl.addClass("past");
+    } else {
+      hourBlockEl.addClass("present");
+    }
+  }
+}
+
+
