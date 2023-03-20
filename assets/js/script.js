@@ -22,6 +22,8 @@
 //   // TODO: Add code to display the current date in the header of the page.
 // });
 
+//documnet.ready
+
 
 var saveBtn = $(".saveBtn");
 var savedToStorageEl = $("#saved-to-storage");
@@ -63,6 +65,7 @@ function setHourBlocks () {
 }
 
 saveBtn.on("click", saveEvent);
+// console.log(calendarEvent);
 
 //gets the event inputed from the user and saves it to local storage
 function saveEvent (event) {
@@ -76,6 +79,17 @@ function saveEvent (event) {
   eventHour = textArea.parent();
   //gets the id from the <div>
   eventId = eventHour.attr("id");
+
+  //if there is already an input for a timeslot, delete that event and replace it with the new one
+  for(i = 0; i < calendarEvent.length; i++) {
+    if (calendarEvent[i].hour === eventId) {
+      console.log("two events found for a timeslot");
+      console.log(calendarEvent[i].input + " vs " + textInput);
+      textInput = textInput.replace(calendarEvent[i].input, textInput);
+    }
+  }
+
+  
 
   //saved the user input into an object with the associated id of the hour block
   var scheduledEvent = {
