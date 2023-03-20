@@ -23,6 +23,13 @@
 // });
 
 
+var saveBtn = $(".saveBtn");
+var savedToStorageEl = $("#saved-to-storage");
+var header = $("header");
+var eventHour;
+var eventId;
+var calendarEvent = JSON.parse(localStorage.getItem("calendarEvent")) || [];
+
 displayDate();
 setHourBlocks();
 
@@ -32,15 +39,19 @@ function displayDate() {
   $("#currentDay").text(today);
 }
 
-//changes the olour of each hour bloack depending on whether it is past, present, or future
+//changes the colour of each hour block depending on whether it is past, present, or future
 function setHourBlocks () {
+  //gets the current hour in 24 hour time and converts it into an int
   var currentHour = parseInt(dayjs().format('HH'));
   var hourBlockEl;
 
   for(i = 0; i <= 8; i++) {
+    //gets the <div> for each hour block
     hourBlockEl = $('body').children("div").children().eq(i);
+    //gets the id of the <div> after the '-' and converts it into an int
     hourNum = parseInt(hourBlockEl.attr("id").split('-')[1]);
 
+    //compares the current hour with the hour of the hour block and changes the colour of each hour block depending on whether it is past, present, or future
     if (currentHour < hourNum) {
       hourBlockEl.addClass("future");
     } else if (currentHour > hourNum) {
@@ -51,14 +62,43 @@ function setHourBlocks () {
   }
 }
 
-var saveBtn = $(".saveBtn");
+saveBtn.on("click", saveEvent);
 
-saveBtn.on("click", function (event) {
-  console.log("haha");
+//gets the event inputed from the user and saves it to local storage
+function saveEvent (event) {
   var element = event.target;
-  console.log(element);
-  var textArea = $(element).prev().val();
-  console.log(textArea)
+  //gets the <textarea> of the save button that has been clicked
+  var textArea = $(element).prev();
+  //gets the value from the <textarea>
+  var textInput = textArea.val();
 
-  localStorage.setItem("calendarEvent", textArea);
-});
+  //gets the <div> hour block assoicated with the save button and <textarea>
+  eventHour = textArea.parent();
+  //gets the id from the <div>
+  eventId = eventHour.attr("id");
+
+  //saved the user input into an object with the associated id of the hour block
+  var scheduledEvent = {
+    hour: eventId,
+    input: textInput
+  }
+  
+  //saves the object to an array (either an empty array or an array from local storage)
+  calendarEvent.push(scheduledEvent);
+  //saves to local storage
+  localStorage.setItem("calendarEvent", JSON.stringify(calendarEvent));
+
+  //tells the user that their data has been saved
+  savedToStorageEl.text(textInput + " saved to local Storage!");
+  header.append(savedToStorageEl);
+}
+
+getEvent();
+
+//retrieves events from local storage and writes it to the hour block it was saved into
+function getEvent () {
+  for(i = 0; i < calendarEvent.length; i++) {
+    var savedEvent = $('body').find("#" + calendarEvent[i].hour).children("textarea");
+    savedEvent.append(calendarEvent[i].input);
+  }
+}
