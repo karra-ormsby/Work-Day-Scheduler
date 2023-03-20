@@ -26,6 +26,7 @@
 
 
 var saveBtn = $(".saveBtn");
+var saveIcon = $(".fa-save");
 var savedToStorageEl = $("#saved-to-storage");
 var header = $("header");
 var eventHour;
@@ -64,12 +65,22 @@ function setHourBlocks () {
   }
 }
 
-saveBtn.on("click", saveEvent);
-// console.log(calendarEvent);
+//when user clicks the blue save button then a function is run to save the event to local storage
+saveBtn.on("click", function(event) {
+  var element = event.target;
+  saveEvent(element)
+});
+
+//if the user clicks the floppy disc icon instead of the blue button it will still run the function to save the event to local storage
+saveIcon.on("click", function(event){
+  event.stopPropagation();
+  var element = event.target;
+  var button = $(element).parent();
+  saveEvent(button);
+});
 
 //gets the event inputed from the user and saves it to local storage
-function saveEvent (event) {
-  var element = event.target;
+function saveEvent (element) {
   //gets the <textarea> of the save button that has been clicked
   var textArea = $(element).prev();
   //gets the value from the <textarea>
@@ -83,20 +94,18 @@ function saveEvent (event) {
   //if there is already an input for a timeslot, delete that event and replace it with the new one
   for(i = 0; i < calendarEvent.length; i++) {
     if (calendarEvent[i].hour === eventId) {
-      console.log("two events found for a timeslot");
-      console.log(calendarEvent[i].input + " vs " + textInput);
-      textInput = textInput.replace(calendarEvent[i].input, textInput);
+      delete calendarEvent[i].hour;
+      delete calendarEvent[i].input;
+      calendarEvent.splice(i, i);
     }
   }
-
   
-
   //saved the user input into an object with the associated id of the hour block
   var scheduledEvent = {
     hour: eventId,
     input: textInput
   }
-  
+
   //saves the object to an array (either an empty array or an array from local storage)
   calendarEvent.push(scheduledEvent);
   //saves to local storage
