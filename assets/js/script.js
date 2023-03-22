@@ -13,7 +13,7 @@ $(document).ready(function () {
 
   //displays the current date
   function displayDate() {
-    var today = dayjs().format('dddd DD[th of] MMMM');
+    var today = dayjs().format('dddd DD[ of] MMMM');
     $("#currentDay").text(today);
   }
 
@@ -69,9 +69,9 @@ $(document).ready(function () {
     //if there is already an input for a timeslot, delete that event and replace it with the new one
     for(i = 0; i < calendarEvent.length; i++) {
       if (calendarEvent[i].hour === eventId) {
-        delete calendarEvent[i].hour;
-        delete calendarEvent[i].input;
-        calendarEvent.splice(i, i);
+        console.log(calendarEvent);
+        calendarEvent.splice(i, 1);
+        console.log(calendarEvent);
       }
     }
     
@@ -85,6 +85,8 @@ $(document).ready(function () {
     calendarEvent.push(scheduledEvent);
     //saves to local storage
     localStorage.setItem("calendarEvent", JSON.stringify(calendarEvent));
+    console.log("after push to storage: ");
+    console.log(calendarEvent);
 
     //tells the user that their data has been saved
     savedToStorageEl.text(textInput + " saved to local Storage!");
@@ -97,5 +99,7 @@ $(document).ready(function () {
       var savedEvent = $('body').find("#" + calendarEvent[i].hour).children("textarea");
       savedEvent.append(calendarEvent[i].input);
     }
+    console.log("in getEvent: ");
+    console.log(calendarEvent);
   }
 });
