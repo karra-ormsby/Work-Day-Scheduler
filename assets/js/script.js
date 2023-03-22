@@ -126,9 +126,8 @@ var textArea = $('teaxtarea');
 
 
 //newly added, may not keep
-clearBtn.on("click", clearData());
-function clearData(event) {
+clearBtn.on("click",function (event) {
   localStorage.clear();
   $("input[type=text], textarea").val("");
 
-}
+});
