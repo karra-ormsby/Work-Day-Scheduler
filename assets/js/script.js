@@ -13,8 +13,24 @@ $(document).ready(function () {
 
   //displays the current date
   function displayDate() {
-    var today = dayjs().format('dddd DD[ of] MMMM');
+    // var today = dayjs().format('dddd DD[ of] MMMM');
+    var today = "Wednesday 21 of March";
     $("#currentDay").text(today);
+
+    //everything below here needs testing may not add to assignment
+    var currentDate = {
+      day: today
+    }
+
+    if (calendarEvent.length > 0 && "day" in calendarEvent[0]) {
+      if (calendarEvent[0].day !== today) {
+        localStorage.clear();
+        $("input[type=text], textarea").val("");
+      }
+    }
+
+    calendarEvent.shift();
+    calendarEvent.unshift(currentDate);;
   }
 
   //changes the colour of each hour block depending on whether it is past, present, or future
@@ -103,3 +119,16 @@ $(document).ready(function () {
     console.log(calendarEvent);
   }
 });
+
+var clearBtn = $('.clearBtn');
+var textArea = $('teaxtarea');
+
+
+
+//newly added, may not keep
+clearBtn.on("click", clearData());
+function clearData(event) {
+  localStorage.clear();
+  $("input[type=text], textarea").val("");
+
+}

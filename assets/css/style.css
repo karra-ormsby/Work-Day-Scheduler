@@ -64,3 +64,9 @@ textarea {
   font-size: 18px;
   margin-top: 2rem;
 }
+
+.clearBtn {
+  border-radius: 10px;
+  background-color: rgb(220, 75, 75);
+  color: white;
+}
