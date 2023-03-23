@@ -2,7 +2,7 @@
 
 ##Description
 
-Given some boilerplate code a daily planner, I have added to the code to create a functioning planner. The planner displays the current date at the top of the page. It displays time block for an average work day (9am to 5pm) with the colour of the time block changing depending on whether the time has passed (the time block/(s) will be grey), is the present time (the time block will be red), or in the future (the time block/(s) will be green). You can click into each time block and enter in an event and then save the event by pressing the save button. The data is then saved to local storage so that you can refresh the page and your event will persist. You can delete an old event and write down a new one to replace it. Once you are done you can hit save and the old event is deleted from storage and only the new event remains. 
+Given some boilerplate code a daily planner, I have added to the code to create a functioning planner. The planner displays the current date at the top of the page. It displays time block for an average work day (9am to 5pm) with the colour of the time block changing depending on whether the time has passed (the time block/(s) will be grey), is the present time (the time block will be red), or in the future (the time block/(s) will be green). You can click into each time block and enter in an event and then save the event by pressing the save button. The data is then saved to local storage so that you can refresh the page and your event will persist. You can delete an old event and write down a new one to replace it. Once you are done you can hit save and the old event is deleted from storage and only the new event remains. I have added extra functionality of a clear all event button, that will clear the local storage and clear all of the schedule hour block too. I just felt like this created a better user experience.
 
 ##Installation
 
@@ -32,7 +32,9 @@ to save their event.Their event is saved into local storage. Upon clicking the s
 
 As the user input is saved into local storage the user can feel free to reload the page and have the confidence that their inout will persist (as long as they continue to use the same web browser).
 
-There is a button, just below the currestn 
+There is a button, just below the current date, that when clicked will allow the user to clear the local storage and all of the schedule hour blocks will be cleared too.
+
+![clear button](./assets/images/Clear%20button.png)
 
 ##Credits
 

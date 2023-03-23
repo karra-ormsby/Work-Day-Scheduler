@@ -1,11 +1,14 @@
 $(document).ready(function () { 
   var saveBtn = $(".saveBtn");
+  var clearBtn = $('.clearBtn');
+  var textArea = $('teaxtarea');
   var saveIcon = $(".fa-save");
   var savedToStorageEl = $("#saved-to-storage");
   var header = $("header");
   var eventHour;
   var eventId;
   var calendarEvent = JSON.parse(localStorage.getItem("calendarEvent")) || [];
+  
 
   displayDate();
   setHourBlocks();
@@ -13,7 +16,8 @@ $(document).ready(function () {
 
   //displays the current date
   function displayDate() {
-    var today = dayjs().format('dddd DD[ of] MMMM');
+    // var today = dayjs().format('dddd DD[ of] MMMM');
+    var today = "Wednesday 22 of March";
     $("#currentDay").text(today);
 
     var currentDate = {
@@ -26,6 +30,8 @@ $(document).ready(function () {
         $("input[type=text], textarea").val("");
       }
     }
+    calendarEvent.shift();
+    calendarEvent.unshift(currentDate);
   }
 
   //changes the colour of each hour block depending on whether it is past, present, or future
@@ -80,9 +86,7 @@ $(document).ready(function () {
     //if there is already an input for a timeslot, delete that event and replace it with the new one
     for(i = 0; i < calendarEvent.length; i++) {
       if (calendarEvent[i].hour === eventId) {
-        console.log(calendarEvent);
         calendarEvent.splice(i, 1);
-        console.log(calendarEvent);
       }
     }
     
@@ -111,16 +115,14 @@ $(document).ready(function () {
       savedEvent.append(calendarEvent[i].input);
     }
     console.log("in getEvent: ");
-    console.log(calendarEvent);
   }
-});
 
-var clearBtn = $('.clearBtn');
-var textArea = $('teaxtarea');
 
-//when the clear event button is pressed by the user the local storage is cleared and all of the schedule hour blocks are cleared too
-clearBtn.on("click",function (event) {
-  localStorage.clear();
-  $("input[type=text], textarea").val("");
+  //when the clear event button is clicked by the user the local storage is cleared and all of the schedule hour blocks are cleared too
+  clearBtn.on("click",function (event) {
+    localStorage.clear();
+    $("input[type=text], textarea").val("");
+
+  });
 
 });
