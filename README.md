@@ -32,6 +32,8 @@ to save their event.Their event is saved into local storage. Upon clicking the s
 
 As the user input is saved into local storage the user can feel free to reload the page and have the confidence that their inout will persist (as long as they continue to use the same web browser).
 
+There is a button, just below the currestn 
+
 ##Credits
 
 Starter code provided by Monash Bootcamp (https://git.bootcampcontent.com/Monash-University/MONU-VIRT-FSF-PT-02-2023-U-LOLC/-/tree/main/Week-05/02-Challenge)

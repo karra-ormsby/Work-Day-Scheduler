@@ -13,11 +13,9 @@ $(document).ready(function () {
 
   //displays the current date
   function displayDate() {
-    // var today = dayjs().format('dddd DD[ of] MMMM');
-    var today = "Wednesday 21 of March";
+    var today = dayjs().format('dddd DD[ of] MMMM');
     $("#currentDay").text(today);
 
-    //everything below here needs testing may not add to assignment
     var currentDate = {
       day: today
     }
@@ -28,9 +26,6 @@ $(document).ready(function () {
         $("input[type=text], textarea").val("");
       }
     }
-
-    calendarEvent.shift();
-    calendarEvent.unshift(currentDate);;
   }
 
   //changes the colour of each hour block depending on whether it is past, present, or future
@@ -123,9 +118,7 @@ $(document).ready(function () {
 var clearBtn = $('.clearBtn');
 var textArea = $('teaxtarea');
 
-
-
-//newly added, may not keep
+//when the clear event button is pressed by the user the local storage is cleared and all of the schedule hour blocks are cleared too
 clearBtn.on("click",function (event) {
   localStorage.clear();
   $("input[type=text], textarea").val("");
