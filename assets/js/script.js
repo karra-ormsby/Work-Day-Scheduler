@@ -16,8 +16,8 @@ $(document).ready(function () {
 
   //displays the current date
   function displayDate() {
-    // var today = dayjs().format('dddd DD[ of] MMMM');
-    var today = "Wednesday 22 of March";
+    var today = dayjs().format('dddd DD[ of] MMMM');
+    // var today = "Wednesday 22 of March";
     $("#currentDay").text(today);
 
     var currentDate = {
@@ -100,8 +100,6 @@ $(document).ready(function () {
     calendarEvent.push(scheduledEvent);
     //saves to local storage
     localStorage.setItem("calendarEvent", JSON.stringify(calendarEvent));
-    console.log("after push to storage: ");
-    console.log(calendarEvent);
 
     //tells the user that their data has been saved
     savedToStorageEl.text(textInput + " saved to local Storage!");
@@ -114,7 +112,6 @@ $(document).ready(function () {
       var savedEvent = $('body').find("#" + calendarEvent[i].hour).children("textarea");
       savedEvent.append(calendarEvent[i].input);
     }
-    console.log("in getEvent: ");
   }
 
 
