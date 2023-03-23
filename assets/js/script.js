@@ -17,14 +17,15 @@ $(document).ready(function () {
   //displays the current date
   function displayDate() {
     var today = dayjs().format('dddd DD[ of] MMMM');
-    // var today = "Wednesday 22 of March";
     $("#currentDay").text(today);
 
     var currentDate = {
       day: today
     }
 
+    //checks if it is a new day
     if (calendarEvent.length > 0 && "day" in calendarEvent[0]) {
+      //if it is clear the local stoarg and the input on the page
       if (calendarEvent[0].day !== today) {
         localStorage.clear();
         $("input[type=text], textarea").val("");
