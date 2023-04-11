@@ -114,13 +114,4 @@ $(document).ready(function () {
       savedEvent.append(calendarEvent[i].input);
     }
   }
-
-
-  //when the clear event button is clicked by the user the local storage is cleared and all of the schedule hour blocks are cleared too
-  clearBtn.on("click",function (event) {
-    localStorage.clear();
-    $("input[type=text], textarea").val("");
-
-  });
-
 });
